@@ -1,9 +1,4 @@
-// Run: bunx tsx src/db/seed-departments.ts (needs DATABASE_URL)
-import "dotenv/config";
-import { db } from "../lib";
-import { departments } from "./schema";
-
-const rows = [
+export const OFFICIAL_DEPARTMENTS = [
   ["AERO", "Aeronautical"],
   ["ASE", "Aerospace"],
   ["AUTO", "Automobile"],
@@ -35,10 +30,3 @@ const rows = [
   ["ARCH", "Architecture"],
   ["OTHER", "Others"],
 ] as const;
-
-await db
-  .insert(departments)
-  .values(rows.map(([code, label]) => ({ code, label })))
-  .onConflictDoNothing();
-console.log(`Seeded ${rows.length} departments`);
-process.exit(0);
